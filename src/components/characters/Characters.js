@@ -2,7 +2,6 @@ import {
   Card,
   CardContent,
   LinearProgress,
-  Container,
   Button,
   Pagination,
 } from "@mui/material"
@@ -29,7 +28,7 @@ export const Characters = () => {
 
   if (isPending) {
     return (
-      <div>
+      <div className={styles.progress}>
         <LinearProgress />
       </div>
     )
@@ -37,18 +36,18 @@ export const Characters = () => {
 
   if (error) {
     return (
-      <Container maxWidth="xl">
+      <div className={styles.error}>
         <h1>{error}</h1>
         <div>
           <Button
-            variant="contained"
-            color="primary"
+            variant="outlined"
+            color="error"
             onClick={() => dispatch(getCharacters())}
           >
             Reload
           </Button>
         </div>
-      </Container>
+      </div>
     )
   }
 

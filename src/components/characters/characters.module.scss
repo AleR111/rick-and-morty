@@ -1,3 +1,5 @@
+$backColor: #24282f;
+
 .characters {
   display: flex;
   flex-direction: column;
@@ -6,11 +8,21 @@
   padding-top: 48px;
   padding-bottom: 48px;
   flex-grow: 1;
-  background-color: #24282f;
+  background-color: $backColor;
 }
-.back {
-  background-color: #24282f;
+
+.progress {
+  background-color: $backColor;
+  height: 100%;
 }
+
+.error {
+  height: 100%;
+  color: #a61c1c;
+  background-color: $backColor;
+  padding: 72px;
+}
+
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -37,6 +49,9 @@
 @media (max-width: 650px) {
   .card {
     flex-direction: column;
+  }
+  .box {
+    width: 100%;
   }
   .media {
     width: 100%;
