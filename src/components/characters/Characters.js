@@ -29,7 +29,7 @@ export const Characters = () => {
   if (isPending) {
     return (
       <div className={styles.progress}>
-        <LinearProgress />
+        <LinearProgress color={"secondary"} />
       </div>
     )
   }
@@ -119,7 +119,9 @@ export const Characters = () => {
         <Pagination
           count={data.info?.pages}
           page={page}
+          variant="outlined"
           shape="rounded"
+          color="secondary"
           onChange={(e, page) => newPage(page)}
         />
       )}
