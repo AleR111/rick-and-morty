@@ -1,13 +1,8 @@
-import {
-  Card,
-  CardContent,
-  LinearProgress,
-  Button,
-  Pagination,
-} from "@mui/material"
+import { LinearProgress, Button, Pagination } from "@mui/material"
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getCharacters } from "../../store/api/thunks"
+import { Character } from "./"
 import styles from "./characters.module.scss"
 
 export const Characters = () => {
@@ -54,68 +49,11 @@ export const Characters = () => {
   return (
     <div className={styles.characters}>
       <div className={styles.container}>
-        <div className={styles.box}>
-          <Card
-            sx={{ backgroundColor: "#3c3e44", color: "#fff" }}
-            className={styles.card}
-          >
-            <img
-              className={styles.media}
-              src="https://rickandmortyapi.com/api/character/avatar/79.jpeg"
-              alt="Live from space album cover"
-            />
-            <CardContent>
-              <h4>Crab Spider</h4>
-              <p>Alive - Alien</p>
-              <h4>Crab Spider</h4>
-              <p>Alive - Alien</p>
-              <h4>Crab Spider</h4>
-              <p>Close Rick-counters of the Rick Kind</p>
-            </CardContent>
-          </Card>
-        </div>
-        <div className={styles.box}>
-          <Card
-            sx={{ backgroundColor: "#3c3e44", color: "#fff" }}
-            className={styles.card}
-          >
-            <img
-              className={styles.media}
-              src="https://rickandmortyapi.com/api/character/avatar/79.jpeg"
-              alt="Live from space album cover"
-            />
-            <CardContent>
-              <h4>Crab Spider</h4>
-              <p>Alive - Alien</p>
-              <h4>Crab Spider</h4>
-              <p>Alive - Alien</p>
-              <h4>Crab Spider</h4>
-              <p>Close Rick-counters of the Rick Kind</p>
-            </CardContent>
-          </Card>
-        </div>
-        <div className={styles.box}>
-          <Card
-            sx={{ backgroundColor: "#3c3e44", color: "#fff" }}
-            className={styles.card}
-          >
-            <img
-              className={styles.media}
-              src="https://rickandmortyapi.com/api/character/avatar/79.jpeg"
-              alt="Live from space album cover"
-            />
-            <CardContent>
-              <h4>Crab Spider</h4>
-              <p>Alive - Alien</p>
-              <h4>Crab Spider</h4>
-              <p>Alive - Alien</p>
-              <h4>Crab Spider</h4>
-              <p>Close Rick-counters of the Rick Kind</p>
-            </CardContent>
-          </Card>
-        </div>
+        {data?.results?.map((el) => (
+          <Character key={el.id} characterData={el} />
+        ))}
       </div>
-      {data.info?.pages && (
+      {data?.info?.pages && (
         <Pagination
           count={data.info?.pages}
           page={page}

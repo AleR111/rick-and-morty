@@ -1,0 +1,41 @@
+.box {
+  width: 600px;
+}
+
+.card {
+  display: flex;
+  background-color: #3c3e44;
+}
+
+.media {
+  width: 220px;
+}
+
+.propsBox {
+display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.prop {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgb(158, 158, 158);
+  margin-bottom: 4px;
+}
+@media (max-width: 650px) {
+  .card {
+    flex-direction: column;
+  }
+  .box {
+    width: 100%;
+  }
+  .media {
+    width: 100%;
+  }
+}

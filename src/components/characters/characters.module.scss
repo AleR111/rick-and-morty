@@ -24,36 +24,11 @@ $backColor: #24282f;
 }
 
 .container {
+  max-width: 1920px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 32px;
+  gap: 24px;
   padding-left: 24px;
   padding-right: 24px;
-}
-
-.box {
-  width: 600px;
-}
-
-.card {
-  display: flex;
-  background-color: #3c3e44;
-
-}
-
-.media {
-  width: 220px;
-}
-
-@media (max-width: 650px) {
-  .card {
-    flex-direction: column;
-  }
-  .box {
-    width: 100%;
-  }
-  .media {
-    width: 100%;
-  }
 }
