@@ -2,7 +2,7 @@ import { LinearProgress, Button, Pagination } from "@mui/material"
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getCharacters } from "../../store/api/thunks"
-import { Character } from "./"
+import { Character, Filters } from "./"
 import styles from "./characters.module.scss"
 
 export const Characters = () => {
@@ -48,6 +48,7 @@ export const Characters = () => {
 
   return (
     <div className={styles.characters}>
+      <Filters />
       <div className={styles.container}>
         {data?.results?.map((el) => (
           <Character key={el.id} characterData={el} />
