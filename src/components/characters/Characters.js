@@ -1,7 +1,16 @@
 import { Card, CardContent } from "@mui/material"
+import { useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { getCharacters } from "../../store/api/thunks"
 import styles from "./characters.module.scss"
 
 export const Characters = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getCharacters())
+  }, [dispatch])
+
   return (
     <div className={styles.characters}>
       <div className={styles.container}>
