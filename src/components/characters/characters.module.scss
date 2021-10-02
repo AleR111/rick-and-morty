@@ -1,4 +1,37 @@
 .characters {
-  height: 100%;
+  padding-top: 48px;
+  padding-bottom: 48px;
+  flex-grow: 1;
   background-color: #24282f;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.box {
+  width: 600px;
+}
+
+.card {
+  display: flex;
+  background-color: #3c3e44;
+
+}
+
+.media {
+  width: 220px;
+}
+
+@media (max-width: 650px) {
+  .card {
+    flex-direction: column;
+  }
+  .media {
+    width: 100%;
+  }
 }
