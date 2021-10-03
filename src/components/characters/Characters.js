@@ -10,17 +10,29 @@ export const Characters = () => {
   const dispatch = useDispatch()
   const [page, setPage] = useState(1)
 
+  const [filter, setFilter] = useState("")
+
   const { data, isPending, error } = useSelector(
     (store) => store.charactersStore,
   )
 
   const getPage = useCallback(
     (page = 1) => {
-      if (data[page]) return
-      dispatch(getCharacters(`page=${page}`, page))
+      console.log(filter)
+      if (filter) {
+        // if (filter !== "clear" && data[page]) return
+        dispatch(getCharacters(`${filter}page=${page}`, page))
+      } else {
+        // if (filter === "clear" && data[page]) return
+        dispatch(getCharacters(`page=${page}`, page))
+      }
     },
-    [dispatch, data],
+    [dispatch, filter],
   )
+
+  const getCharactersWithFilters = (filter) => {
+    setFilter(filter)
+  }
 
   const newPage = (page) => {
     setPage(page)
@@ -60,7 +72,12 @@ export const Characters = () => {
 
   return (
     <div className={styles.characters}>
-      <Filters firstPage={() => setPage(1)} getPage={getPage} />
+      <Filters
+        firstPage={() => setPage(1)}
+        getPage={getPage}
+        getCharactersWithFilters={getCharactersWithFilters}
+        clearFilterUrl={() => setFilter("clear")}
+      />
       <div className={styles.container}>
         {data[page]?.results?.map((el) => (
           <Character key={el.id} characterData={el} />
