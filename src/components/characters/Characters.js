@@ -29,7 +29,8 @@ export const Characters = () => {
 
   const reload = () => {
     dispatch(clearFilter())
-    getPage()
+    dispatch(getCharacters(`page=${1}`, 1))
+    console.log(111111111)
   }
 
   useEffect(() => {
@@ -59,7 +60,7 @@ export const Characters = () => {
 
   return (
     <div className={styles.characters}>
-      <Filters />
+      <Filters page={page} />
       <div className={styles.container}>
         {data[page]?.results?.map((el) => (
           <Character key={el.id} characterData={el} />
