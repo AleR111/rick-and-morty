@@ -1,6 +1,6 @@
 import { Backdrop, Box, Card, CardContent, Fade, Modal } from "@mui/material"
 import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { shallowEqual, useDispatch, useSelector } from "react-redux"
 import { getEpisodes } from "../../../../store/episodes/thunks"
 import styles from "../character.module.scss"
 const style = {
@@ -13,19 +13,21 @@ const style = {
 }
 export const Popup = ({ open, handleClose, characterData }) => {
   const dispatch = useDispatch()
-  const isHave = useSelector(
-    (store) => store.episodesStore.data[characterData.id],
-  )
+  const firstEpisode =
+    useSelector(
+      (store) => store.episodesStore.data[characterData.id],
+      shallowEqual,
+    ) || ""
 
   useEffect(() => {
-    if (isHave) return
+    if (firstEpisode) return
     dispatch(
       getEpisodes(
         characterData.episode[characterData.episode.length - 1],
         characterData.id,
       ),
     )
-  }, [dispatch, characterData.episode, characterData.id, isHave])
+  }, [dispatch, characterData.episode, characterData.id, firstEpisode])
 
   return (
     <Modal
@@ -54,12 +56,13 @@ export const Popup = ({ open, handleClose, characterData }) => {
               <div>
                 <h2 className={styles.name}>{characterData.name}</h2>
                 <p>
-                  {characterData.status} - {characterData.species}
+                  {characterData.status} - {characterData.species},
+                  gender&nbsp;-&nbsp;{characterData.gender}
                 </p>
               </div>
               <div>
-                <h4 className={styles.prop}>Number of episodes:</h4>
-                <p>{characterData.episode.length}</p>
+                <h4 className={styles.prop}>Origin:</h4>
+                <p>{characterData.origin.name}</p>
               </div>
               <div>
                 <h4 className={styles.prop}>Last known location:</h4>
@@ -70,8 +73,11 @@ export const Popup = ({ open, handleClose, characterData }) => {
                 <p>{characterData.episode.length}</p>
               </div>
               <div>
-                <h4 className={styles.prop}>Last known location:</h4>
-                <p>{characterData.location.name}</p>
+                <h4 className={styles.prop}>First seen in:</h4>
+                <p>
+                  {firstEpisode.air_date} <br />№{firstEpisode.episode} -{" "}
+                  {firstEpisode.name}
+                </p>
               </div>
             </CardContent>
           </Card>
