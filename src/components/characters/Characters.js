@@ -30,7 +30,6 @@ export const Characters = () => {
   const reload = () => {
     dispatch(clearFilter())
     dispatch(getCharacters(`page=${1}`, 1))
-    console.log(111111111)
   }
 
   useEffect(() => {
