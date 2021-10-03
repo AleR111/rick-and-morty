@@ -1,63 +1,112 @@
+import { Search } from "@mui/icons-material"
 import {
   FormControl,
   InputLabel,
   Select,
   MenuItem,
   TextField,
+  IconButton,
 } from "@mui/material"
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { getCharacters } from "../../../store/api/thunks"
+import styles from "./filters.module.scss"
 
 export const Filters = () => {
-  const [age, setAge] = useState("")
+  const dispatch = useDispatch()
+  const [filters, setFilters] = useState({})
 
-  const handleChange = (event) => {
-    setAge(event.target.value)
+  const handleChange = (e) => {
+    console.log(e.target)
+    setFilters((filters) => ({
+      ...filters,
+      [e.target.name]: e.target.value,
+    }))
+  }
+
+  const search = () => {
+    let filter = ""
+    for (const key in filters) {
+      if (!filters[key]) continue
+      filter += `${key}=${filters[key]}&`
+    }
+    console.log(filters)
+    dispatch(getCharacters(filter))
   }
 
   return (
-    <div>
+    <div className={styles.filters}>
       <FormControl variant="standard" sx={{ m: 1, width: 120 }}>
-        <TextField id="name" label="Name" variant="standard" />
+        <TextField
+          id="name"
+          name="name"
+          label="Name"
+          variant="standard"
+          value={filters.name}
+          onChange={handleChange}
+        />
       </FormControl>
       <FormControl variant="standard" sx={{ m: 1, width: 120 }}>
         <InputLabel id="status-label">Status</InputLabel>
         <Select
           labelId="status-label"
           id="status"
-          value={age}
+          name="status"
+          value={filters.status}
           onChange={handleChange}
           label="Status"
         >
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          <MenuItem value={"alive"}>Alive</MenuItem>
+          <MenuItem value={"dead"}>Dead</MenuItem>
+          <MenuItem value={"unknown"}>Unknown</MenuItem>
         </Select>
       </FormControl>
       <FormControl variant="standard" sx={{ m: 1, width: 120 }}>
-        <TextField id="species" label="Species" variant="standard" />
+        <TextField
+          id="species"
+          name="species"
+          label="Species"
+          variant="standard"
+          value={filters.species}
+          onChange={handleChange}
+        />
       </FormControl>
       <FormControl variant="standard" sx={{ m: 1, width: 120 }}>
-        <TextField id="type" label="Type" variant="standard" />
+        <TextField
+          id="type"
+          name="type"
+          label="Type"
+          variant="standard"
+          value={filters.type}
+          onChange={handleChange}
+        />
       </FormControl>
       <FormControl variant="standard" sx={{ m: 1, width: 120 }}>
         <InputLabel id="gender-label">Gender</InputLabel>
         <Select
           labelId="gender-label"
           id="gender"
-          value={age}
+          name="gender"
+          value={filters.gender}
           onChange={handleChange}
           label="Gender"
         >
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          <MenuItem value={"female"}>Female</MenuItem>
+          <MenuItem value={"male"}>Male</MenuItem>
+          <MenuItem value={"genderless"}>Genderless</MenuItem>
+          <MenuItem value={"unknown"}>Unknown</MenuItem>
         </Select>
+      </FormControl>
+      <FormControl variant="standard" sx={{ m: 1, width: 20 }}>
+        <IconButton aria-label="fingerprint" color="secondary" onClick={search}>
+          <Search />
+        </IconButton>
       </FormControl>
     </div>
   )

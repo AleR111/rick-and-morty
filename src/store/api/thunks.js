@@ -17,9 +17,7 @@ const loadData = async (dispatch, url) => {
   }
 }
 
-export const getCharacters =
-  (page = 1) =>
-  async (dispatch) => {
-    const url = `${CHARACTER_URL}?page=${page}`
-    await loadData(dispatch, url)
-  }
+export const getCharacters = (endPoint) => async (dispatch) => {
+  const url = `${CHARACTER_URL}?${endPoint}`
+  await loadData(dispatch, url)
+}

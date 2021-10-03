@@ -1,5 +1,5 @@
 import { LinearProgress, Button, Pagination } from "@mui/material"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getCharacters } from "../../store/api/thunks"
 import { Character, Filters } from "./"
@@ -8,18 +8,26 @@ import styles from "./characters.module.scss"
 export const Characters = () => {
   const dispatch = useDispatch()
   const [page, setPage] = useState(1)
-  const newPage = (page) => {
-    setPage(page)
-    dispatch(getCharacters(page))
-  }
 
   const { data, isPending, error } = useSelector(
     (store) => store.charactersStore,
   )
 
+  const getPage = useCallback(
+    (page = 1) => {
+      dispatch(getCharacters(`page=${page}`))
+    },
+    [dispatch],
+  )
+
+  const newPage = (page) => {
+    setPage(page)
+    getPage(page)
+  }
+
   useEffect(() => {
-    dispatch(getCharacters())
-  }, [dispatch])
+    getPage()
+  }, [getPage])
 
   if (isPending) {
     return (
@@ -34,11 +42,7 @@ export const Characters = () => {
       <div className={styles.error}>
         <h1>{error}</h1>
         <div>
-          <Button
-            variant="outlined"
-            color="error"
-            onClick={() => dispatch(getCharacters())}
-          >
+          <Button variant="outlined" color="error" onClick={() => getPage()}>
             Reload
           </Button>
         </div>
