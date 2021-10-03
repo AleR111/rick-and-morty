@@ -21,8 +21,8 @@ export const Character = ({ characterData }) => {
             </p>
           </div>
           <div>
-            <h4 className={styles.prop}>Gender:</h4>
-            <p>{characterData.gender}</p>
+            <h4 className={styles.prop}>Number of episodes:</h4>
+            <p>{characterData.episode.length}</p>
           </div>
           <div>
             <h4 className={styles.prop}>Last known location:</h4>
