@@ -1,11 +1,12 @@
-import { Search, Clear } from "@mui/icons-material"
+import { Search, Clear, FilterAlt } from "@mui/icons-material"
 import {
   FormControl,
   InputLabel,
   Select,
   MenuItem,
   TextField,
-  IconButton,
+  Button,
+  ButtonGroup,
 } from "@mui/material"
 import { useDispatch, useSelector } from "react-redux"
 import { getCharacters } from "../../../store/api/thunks"
@@ -35,24 +36,25 @@ export const Filters = ({ page }) => {
 
   return (
     <div className={styles.filters}>
-      <FormControl variant="standard" sx={{ m: 1, width: 120 }}>
+      <FormControl>
+        <FilterAlt color="primary" fontSize="large" />
+      </FormControl>
+      <FormControl className={styles.formControl}>
         <TextField
           id="name"
           name="name"
           label="Name"
           variant="standard"
-          className={styles.input}
           value={filters.name}
           onChange={handleChange}
         />
       </FormControl>
-      <FormControl variant="standard" sx={{ m: 1, width: 120 }}>
+      <FormControl variant="standard" className={styles.formControl}>
         <InputLabel id="status-label">Status</InputLabel>
         <Select
           labelId="status-label"
           id="status"
           name="status"
-          className={styles.input}
           value={filters.status}
           onChange={handleChange}
           label="Status"
@@ -67,7 +69,7 @@ export const Filters = ({ page }) => {
           <MenuItem value={"unknown"}>Unknown</MenuItem>
         </Select>
       </FormControl>
-      <FormControl variant="standard" sx={{ m: 1, width: 120 }}>
+      <FormControl className={styles.formControl}>
         <TextField
           id="species"
           name="species"
@@ -77,7 +79,7 @@ export const Filters = ({ page }) => {
           onChange={handleChange}
         />
       </FormControl>
-      <FormControl variant="standard" sx={{ m: 1, width: 120 }}>
+      <FormControl className={styles.formControl}>
         <TextField
           id="type"
           name="type"
@@ -87,7 +89,7 @@ export const Filters = ({ page }) => {
           onChange={handleChange}
         />
       </FormControl>
-      <FormControl variant="standard" sx={{ m: 1, width: 120 }}>
+      <FormControl variant="standard" className={styles.formControl}>
         <InputLabel id="gender-label">Gender</InputLabel>
         <Select
           labelId="gender-label"
@@ -106,15 +108,15 @@ export const Filters = ({ page }) => {
           <MenuItem value={"unknown"}>Unknown</MenuItem>
         </Select>
       </FormControl>
-      <FormControl variant="standard" sx={{ m: 1, width: 20 }}>
-        <IconButton aria-label="fingerprint" color="secondary" onClick={search}>
-          <Search />
-        </IconButton>
-      </FormControl>
-      <FormControl variant="standard" sx={{ m: 1, width: 20 }}>
-        <IconButton aria-label="fingerprint" color="secondary" onClick={clear}>
-          <Clear />
-        </IconButton>
+      <FormControl>
+        <ButtonGroup orientation="horizontal" variant="text">
+          <Button onClick={search}>
+            <Search />
+          </Button>
+          <Button onClick={clear}>
+            <Clear />
+          </Button>
+        </ButtonGroup>
       </FormControl>
     </div>
   )

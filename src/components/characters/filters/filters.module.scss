@@ -1,10 +1,15 @@
 .filters {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
-  align-items: flex-end;
+  padding-left: 8px;
+  padding-right: 8px;
+  background-color: #47485c;
+  border-radius: 32px;
 }
 
-.input input {
-  color: #7e878a;
+.formControl {
+  width: 120px;
+  margin: 8px !important;
 }
