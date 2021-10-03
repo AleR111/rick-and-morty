@@ -2,6 +2,7 @@ import { LinearProgress, Button, Pagination } from "@mui/material"
 import { useState, useEffect, useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getCharacters } from "../../store/api/thunks"
+import { clearFilter } from "../../store/filters"
 import { Character, Filters } from "./"
 import styles from "./characters.module.scss"
 
@@ -25,6 +26,11 @@ export const Characters = () => {
     getPage(page)
   }
 
+  const reload = () => {
+    dispatch(clearFilter())
+    getPage()
+  }
+
   useEffect(() => {
     getPage()
   }, [getPage])
@@ -42,7 +48,7 @@ export const Characters = () => {
       <div className={styles.error}>
         <h1>{error}</h1>
         <div>
-          <Button variant="outlined" color="error" onClick={() => getPage()}>
+          <Button variant="outlined" color="error" onClick={reload}>
             Reload
           </Button>
         </div>

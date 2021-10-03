@@ -7,7 +7,7 @@ const loadData = async (dispatch, url) => {
   try {
     const response = await fetch(url)
     if (!response.ok) {
-      throw new Error(`Error: ${response.status}`)
+      throw new Error(`Characters don't found`)
     }
 
     const data = await response.json()

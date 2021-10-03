@@ -1,4 +1,4 @@
-import { Search } from "@mui/icons-material"
+import { Search, Clear } from "@mui/icons-material"
 import {
   FormControl,
   InputLabel,
@@ -9,7 +9,7 @@ import {
 } from "@mui/material"
 import { useDispatch, useSelector } from "react-redux"
 import { getCharacters } from "../../../store/api/thunks"
-import { setFilter } from "../../../store/filters"
+import { clearFilter, setFilter } from "../../../store/filters"
 import styles from "./filters.module.scss"
 
 export const Filters = () => {
@@ -28,6 +28,10 @@ export const Filters = () => {
       filter += `${key}=${filters[key]}&`
     }
     dispatch(getCharacters(filter))
+  }
+
+  const clear = () => {
+    dispatch(clearFilter())
   }
 
   return (
@@ -102,6 +106,11 @@ export const Filters = () => {
       <FormControl variant="standard" sx={{ m: 1, width: 20 }}>
         <IconButton aria-label="fingerprint" color="secondary" onClick={search}>
           <Search />
+        </IconButton>
+      </FormControl>
+      <FormControl variant="standard" sx={{ m: 1, width: 20 }}>
+        <IconButton aria-label="fingerprint" color="secondary" onClick={clear}>
+          <Clear />
         </IconButton>
       </FormControl>
     </div>
