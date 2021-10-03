@@ -14,8 +14,7 @@ import styles from "./filters.module.scss"
 
 export const Filters = () => {
   const dispatch = useDispatch()
-  const filters = useSelector((state) => state.filtersStore)
-  const { name, status, species, type, gender } = filters
+  const filters = useSelector((state) => state.filtersStore.filters)
 
   const handleChange = (e) => {
     dispatch(setFilter(e.target.name, e.target.value))
@@ -42,7 +41,7 @@ export const Filters = () => {
           name="name"
           label="Name"
           variant="standard"
-          value={name}
+          value={filters.name}
           onChange={handleChange}
         />
       </FormControl>
@@ -52,7 +51,7 @@ export const Filters = () => {
           labelId="status-label"
           id="status"
           name="status"
-          value={status}
+          value={filters.status}
           onChange={handleChange}
           label="Status"
         >
@@ -70,7 +69,7 @@ export const Filters = () => {
           name="species"
           label="Species"
           variant="standard"
-          value={species}
+          value={filters.species}
           onChange={handleChange}
         />
       </FormControl>
@@ -80,7 +79,7 @@ export const Filters = () => {
           name="type"
           label="Type"
           variant="standard"
-          value={type}
+          value={filters.type}
           onChange={handleChange}
         />
       </FormControl>
@@ -90,7 +89,7 @@ export const Filters = () => {
           labelId="gender-label"
           id="gender"
           name="gender"
-          value={gender}
+          value={filters.gender}
           onChange={handleChange}
           label="Gender"
         >
