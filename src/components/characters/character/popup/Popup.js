@@ -53,26 +53,26 @@ export const Popup = ({ open, handleClose, characterData }) => {
             alt={characterData.name}
           />
           <CardContent className={styles.propsBox}>
-            <div>
+            <div className={styles.propPop}>
               <h2 className={styles.name}>{characterData.name}</h2>
               <p>
                 {characterData.status} - {characterData.species},
                 gender&nbsp;-&nbsp;{characterData.gender}
               </p>
             </div>
-            <div>
+            <div className={styles.propPop}>
               <h4 className={styles.prop}>Origin:</h4>
               <p>{characterData.origin.name}</p>
             </div>
-            <div>
+            <div className={styles.propPop}>
               <h4 className={styles.prop}>Last known location:</h4>
               <p>{characterData.location.name}</p>
             </div>
-            <div>
+            <div className={styles.propPop}>
               <h4 className={styles.prop}>Number of episodes:</h4>
               <p>{characterData.episode.length}</p>
             </div>
-            <div>
+            <div className={styles.propPop}>
               <h4 className={styles.prop}>First seen in:</h4>
               <p>
                 {firstEpisode.air_date} <br />№{firstEpisode.episode} -{" "}
