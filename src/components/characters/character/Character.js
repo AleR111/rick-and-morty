@@ -1,18 +1,7 @@
-import { Card, CardContent, Modal, Backdrop, Fade, Box } from "@mui/material"
+import { Card, CardContent } from "@mui/material"
 import { useState } from "react"
 import styles from "./character.module.scss"
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-}
+import { Popup } from "./popup"
 
 export const Character = ({ characterData }) => {
   const [open, setOpen] = useState(false)
@@ -52,23 +41,11 @@ export const Character = ({ characterData }) => {
           </CardContent>
         </Card>
       </div>
-      <div>
-        <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          open={open}
-          onClose={handleClose}
-          closeAfterTransition={true}
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <Fade in={open}>
-            <Box sx={style}>Text in a modal</Box>
-          </Fade>
-        </Modal>
-      </div>
+      <Popup
+        open={open}
+        handleClose={handleClose}
+        characterData={characterData}
+      />
     </>
   )
 }
