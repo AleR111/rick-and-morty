@@ -15,9 +15,10 @@ import styles from "./filters.module.scss"
 export const Filters = () => {
   const dispatch = useDispatch()
   const filters = useSelector((state) => state.filtersStore)
+  const { name, status, species, type, gender } = filters
 
   const handleChange = (e) => {
-    dispatch(setFilter(e.target))
+    dispatch(setFilter(e.target.name, e.target.value))
   }
 
   const search = () => {
@@ -26,7 +27,6 @@ export const Filters = () => {
       if (!filters[key]) continue
       filter += `${key}=${filters[key]}&`
     }
-    console.log(filters)
     dispatch(getCharacters(filter))
   }
 
@@ -38,7 +38,7 @@ export const Filters = () => {
           name="name"
           label="Name"
           variant="standard"
-          value={filters.name}
+          value={name}
           onChange={handleChange}
         />
       </FormControl>
@@ -48,7 +48,7 @@ export const Filters = () => {
           labelId="status-label"
           id="status"
           name="status"
-          value={filters.status}
+          value={status}
           onChange={handleChange}
           label="Status"
         >
@@ -66,7 +66,7 @@ export const Filters = () => {
           name="species"
           label="Species"
           variant="standard"
-          value={filters.species}
+          value={species}
           onChange={handleChange}
         />
       </FormControl>
@@ -76,7 +76,7 @@ export const Filters = () => {
           name="type"
           label="Type"
           variant="standard"
-          value={filters.type}
+          value={type}
           onChange={handleChange}
         />
       </FormControl>
@@ -86,7 +86,7 @@ export const Filters = () => {
           labelId="gender-label"
           id="gender"
           name="gender"
-          value={filters.gender}
+          value={gender}
           onChange={handleChange}
           label="Gender"
         >

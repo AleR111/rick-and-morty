@@ -1,3 +1,6 @@
 import { SET_FILTER } from "./types"
 
-export const setFilter = (filter) => ({ type: SET_FILTER, payload: filter })
+export const setFilter = (name, value) => ({
+  type: SET_FILTER,
+  payload: { name, value },
+})
