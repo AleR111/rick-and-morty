@@ -2,7 +2,7 @@ import { loadingError, loadingStart, loadingSuccess } from "./actions"
 
 const CHARACTER_URL = "https://rickandmortyapi.com/api/character"
 
-const loadData = async (dispatch, url) => {
+const loadData = async (dispatch, url, id) => {
   dispatch(loadingStart())
   try {
     const response = await fetch(url)
@@ -11,13 +11,13 @@ const loadData = async (dispatch, url) => {
     }
 
     const data = await response.json()
-    dispatch(loadingSuccess(data))
+    dispatch(loadingSuccess(data, id))
   } catch (error) {
     dispatch(loadingError(error.message))
   }
 }
 
-export const getCharacters = (endPoint) => async (dispatch) => {
+export const getCharacters = (endPoint, id) => async (dispatch) => {
   const url = `${CHARACTER_URL}?${endPoint}`
-  await loadData(dispatch, url)
+  await loadData(dispatch, url, id)
 }

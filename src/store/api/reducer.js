@@ -17,7 +17,10 @@ export const charactersReducer = (state = initialState, action) => {
       return {
         ...state,
         isPending: false,
-        data: action.payload,
+        data: {
+          ...state.data,
+          [action.payload.id]: action.payload.data,
+        },
         error: false,
       }
     case LOADING_ERROR:

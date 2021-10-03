@@ -16,9 +16,10 @@ export const Characters = () => {
 
   const getPage = useCallback(
     (page = 1) => {
-      dispatch(getCharacters(`page=${page}`))
+      if (data[page]) return
+      dispatch(getCharacters(`page=${page}`, page))
     },
-    [dispatch],
+    [dispatch, data],
   )
 
   const newPage = (page) => {
@@ -60,13 +61,13 @@ export const Characters = () => {
     <div className={styles.characters}>
       <Filters />
       <div className={styles.container}>
-        {data?.results?.map((el) => (
+        {data[page]?.results?.map((el) => (
           <Character key={el.id} characterData={el} />
         ))}
       </div>
-      {data?.info?.pages && (
+      {data[page]?.info?.pages && (
         <Pagination
-          count={data.info?.pages}
+          count={data[page].info?.pages}
           page={page}
           variant="outlined"
           shape="rounded"
