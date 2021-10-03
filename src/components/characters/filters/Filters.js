@@ -41,6 +41,7 @@ export const Filters = () => {
           name="name"
           label="Name"
           variant="standard"
+          className={styles.input}
           value={filters.name}
           onChange={handleChange}
         />
@@ -51,6 +52,7 @@ export const Filters = () => {
           labelId="status-label"
           id="status"
           name="status"
+          className={styles.input}
           value={filters.status}
           onChange={handleChange}
           label="Status"
@@ -58,7 +60,9 @@ export const Filters = () => {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={"alive"}>Alive</MenuItem>
+          <MenuItem className={styles.input} value={"alive"}>
+            Alive
+          </MenuItem>
           <MenuItem value={"dead"}>Dead</MenuItem>
           <MenuItem value={"unknown"}>Unknown</MenuItem>
         </Select>
