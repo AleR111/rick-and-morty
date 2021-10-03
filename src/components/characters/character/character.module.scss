@@ -1,5 +1,8 @@
 .box {
   width: 600px;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .card {
