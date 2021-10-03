@@ -7,21 +7,17 @@ import {
   TextField,
   IconButton,
 } from "@mui/material"
-import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { getCharacters } from "../../../store/api/thunks"
+import { setFilter } from "../../../store/filters"
 import styles from "./filters.module.scss"
 
 export const Filters = () => {
   const dispatch = useDispatch()
-  const [filters, setFilters] = useState({})
+  const filters = useSelector((state) => state.filtersStore)
 
   const handleChange = (e) => {
-    console.log(e.target)
-    setFilters((filters) => ({
-      ...filters,
-      [e.target.name]: e.target.value,
-    }))
+    dispatch(setFilter(e.target))
   }
 
   const search = () => {
