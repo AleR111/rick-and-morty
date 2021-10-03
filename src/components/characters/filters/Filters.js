@@ -13,7 +13,7 @@ import { getCharacters } from "../../../store/api/thunks"
 import { clearFilter, setFilter } from "../../../store/filters"
 import styles from "./filters.module.scss"
 
-export const Filters = ({ page }) => {
+export const Filters = ({ firstPage }) => {
   const dispatch = useDispatch()
   const filters = useSelector((state) => state.filtersStore.filters)
 
@@ -27,11 +27,15 @@ export const Filters = ({ page }) => {
       if (!filters[key]) continue
       filter += `${key}=${filters[key]}&`
     }
-    dispatch(getCharacters(filter, page))
+    if (!filter) return
+    firstPage()
+    dispatch(getCharacters(filter, 1))
   }
 
   const clear = () => {
     dispatch(clearFilter())
+    dispatch(getCharacters(`page=${1}`, 1))
+    firstPage()
   }
 
   return (

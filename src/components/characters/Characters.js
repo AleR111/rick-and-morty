@@ -25,6 +25,7 @@ export const Characters = () => {
   const newPage = (page) => {
     setPage(page)
     getPage(page)
+    window.scrollTo({ top: 0 })
   }
 
   const reload = () => {
@@ -59,7 +60,7 @@ export const Characters = () => {
 
   return (
     <div className={styles.characters}>
-      <Filters page={page} />
+      <Filters firstPage={() => setPage(1)} getPage={getPage} />
       <div className={styles.container}>
         {data[page]?.results?.map((el) => (
           <Character key={el.id} characterData={el} />
