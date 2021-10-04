@@ -44,33 +44,34 @@ export const Content = () => {
     dispatch(getCharacters(`page=${1}`, 1))
   }, [dispatch])
 
-  if (isPending) {
-    console.log("qwe", isPending)
-    return (
-      <div className={styles.progress}>
-        <LinearProgress color={"secondary"} />
-      </div>
-    )
-  }
-
-  if (error) {
-    console.log("dsfds", error)
-    return (
-      <div className={styles.error}>
-        <h1>{error}</h1>
-        <div>
-          <Button variant="outlined" color="error" onClick={reload}>
-            Reload
-          </Button>
+  const loading = () => {
+    if (isPending) {
+      return (
+        <div className={styles.progress}>
+          <LinearProgress color={"secondary"} />
         </div>
-      </div>
-    )
+      )
+    }
+
+    if (error) {
+      return (
+        <div className={styles.error}>
+          <h1>{error}</h1>
+          <div>
+            <Button variant="outlined" color="error" onClick={reload}>
+              Reload
+            </Button>
+          </div>
+        </div>
+      )
+    }
+    return <Characters data={data[page]?.results} />
   }
 
   return (
-    <div className={styles.characters}>
+    <div className={styles.content}>
       <Filters firstPage={() => setPage(1)} />
-      <Characters data={data[page]?.results} />
+      {loading()}
       {data[page]?.info?.pages && (
         <Pagination
           count={data[page].info?.pages}

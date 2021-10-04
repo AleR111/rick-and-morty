@@ -1,5 +1,5 @@
 export const loadData = async (dispatch, action, url, id) => {
-  dispatch(action.loadingError())
+  dispatch(action.loadingStart())
   try {
     const response = await fetch(url)
     if (!response.ok) {
