@@ -11,6 +11,15 @@ const initialState = {
   filtersUrl: "",
 }
 
+const clear = (prevObj) => {
+  const newObj = { ...prevObj }
+  for (const key in newObj) {
+    if (!newObj[key]) continue
+    newObj[key] = ""
+  }
+  return newObj
+}
+
 export const filtersReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_FILTER:
@@ -24,14 +33,7 @@ export const filtersReducer = (state = initialState, action) => {
     case CLEAR_FILTER:
       return {
         ...state,
-        filters: {
-          ...state.filters,
-          name: "",
-          status: "",
-          species: "",
-          type: "",
-          gender: "",
-        },
+        filters: clear(state.filters),
         filtersUrl: "",
       }
     case SET_FILTER_URL:
