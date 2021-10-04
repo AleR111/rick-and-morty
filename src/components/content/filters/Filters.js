@@ -42,80 +42,87 @@ export const Filters = ({ firstPage }) => {
     firstPage()
   }
 
+  const filtersForRender = [
+    {
+      id: "name",
+      label: "Name",
+      value: filters.name,
+    },
+    {
+      id: "status",
+      idLabel: "status-label",
+      label: "Status",
+      value: filters.status,
+      menu: ["alive", "dead", "unknown"],
+    },
+    {
+      id: "species",
+      label: "Species",
+      value: filters.species,
+    },
+    {
+      id: "type",
+      label: "Type",
+      value: filters.type,
+    },
+    {
+      id: "gender",
+      idLabel: "gender-label",
+      label: "Gender",
+      value: filters.gender,
+      menu: ["female", "male", "genderless", "unknown"],
+    },
+  ]
+
   return (
     <div className={styles.filters}>
       <FormControl>
         <FilterAlt color="primary" fontSize="large" />
       </FormControl>
-      <FormControl className={styles.formControl}>
-        <TextField
-          id="name"
-          name="name"
-          label="Name"
-          variant="standard"
-          value={filters.name}
-          onChange={handleChange}
-        />
-      </FormControl>
-      <FormControl variant="standard" className={styles.formControl}>
-        <InputLabel id="status-label">Status</InputLabel>
-        <Select
-          labelId="status-label"
-          id="status"
-          name="status"
-          value={filters.status}
-          onChange={handleChange}
-          label="Status"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem className={styles.input} value={"alive"}>
-            Alive
-          </MenuItem>
-          <MenuItem value={"dead"}>Dead</MenuItem>
-          <MenuItem value={"unknown"}>Unknown</MenuItem>
-        </Select>
-      </FormControl>
-      <FormControl className={styles.formControl}>
-        <TextField
-          id="species"
-          name="species"
-          label="Species"
-          variant="standard"
-          value={filters.species}
-          onChange={handleChange}
-        />
-      </FormControl>
-      <FormControl className={styles.formControl}>
-        <TextField
-          id="type"
-          name="type"
-          label="Type"
-          variant="standard"
-          value={filters.type}
-          onChange={handleChange}
-        />
-      </FormControl>
-      <FormControl variant="standard" className={styles.formControl}>
-        <InputLabel id="gender-label">Gender</InputLabel>
-        <Select
-          labelId="gender-label"
-          id="gender"
-          name="gender"
-          value={filters.gender}
-          onChange={handleChange}
-          label="Gender"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={"female"}>Female</MenuItem>
-          <MenuItem value={"male"}>Male</MenuItem>
-          <MenuItem value={"genderless"}>Genderless</MenuItem>
-          <MenuItem value={"unknown"}>Unknown</MenuItem>
-        </Select>
-      </FormControl>
+      {filtersForRender.map((el) => {
+        if (!el?.menu) {
+          return (
+            <FormControl key={el.id} className={styles.formControl}>
+              <TextField
+                id={el.id}
+                name={el.id}
+                label={el.label}
+                variant="standard"
+                value={el.value}
+                onChange={handleChange}
+              />
+            </FormControl>
+          )
+        }
+
+        return (
+          <FormControl
+            key={el.id}
+            variant="standard"
+            className={styles.formControl}
+          >
+            <InputLabel id={el.idLabel}>{el.label}</InputLabel>
+            <Select
+              labelId={el.idLabel}
+              id={el.id}
+              name={el.id}
+              value={el.value}
+              onChange={handleChange}
+            >
+              <MenuItem value="">
+                <em>none</em>
+              </MenuItem>
+              {el.menu.map((el) => {
+                return (
+                  <MenuItem key={el} value={el}>
+                    {el}
+                  </MenuItem>
+                )
+              })}
+            </Select>
+          </FormControl>
+        )
+      })}
       <FormControl>
         <ButtonGroup orientation="horizontal" variant="text">
           <Button onClick={search}>

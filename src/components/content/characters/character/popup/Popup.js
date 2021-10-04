@@ -24,7 +24,6 @@ export const Popup = ({ open, handleClose, characterData }) => {
     ) || ""
 
   const firstEpisode = data[characterData.id] || ""
-  console.log(111111111111111)
   useEffect(() => {
     if (firstEpisode) return
     dispatch(getEpisodes(characterData.episode[[0]], characterData.id))
