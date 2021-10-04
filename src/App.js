@@ -1,10 +1,11 @@
 import "./App.css"
-import { Header, Characters } from "./components"
+import { Header, Characters, Content } from "./components"
 
 export const App = () => {
   return (
     <div className={"App"}>
       <Header />
+      <Content />
       <Characters />
     </div>
   )
