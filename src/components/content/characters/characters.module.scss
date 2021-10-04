@@ -1,0 +1,34 @@
+$backColor: #24282f;
+
+.characters {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding-top: 48px;
+  padding-bottom: 48px;
+  flex-grow: 1;
+  background-color: $backColor;
+}
+
+.progress {
+  background-color: $backColor;
+  height: 100%;
+}
+
+.error {
+  height: 100%;
+  color: #a61c1c;
+  background-color: $backColor;
+  padding: 72px;
+}
+
+.container {
+  max-width: 1920px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
+}

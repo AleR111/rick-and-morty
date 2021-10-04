@@ -1,10 +1,11 @@
-import { useDispatch, useSelector } from "react-redux"
+import { Button, LinearProgress, Pagination } from "@mui/material"
 import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { getCharacters } from "../../store/characters/thunks"
 import { clearFilter } from "../../store/filters"
-import styles from "../characters/characters.module.scss"
-import { Button, LinearProgress, Pagination } from "@mui/material"
-import { Character, Filters } from "../characters"
+import { Characters } from "./characters"
+import styles from "./content.module.scss"
+import { Filters } from "./filters"
 
 export const Content = () => {
   const dispatch = useDispatch()
@@ -44,6 +45,7 @@ export const Content = () => {
   }, [dispatch])
 
   if (isPending) {
+    console.log("qwe", isPending)
     return (
       <div className={styles.progress}>
         <LinearProgress color={"secondary"} />
@@ -52,6 +54,7 @@ export const Content = () => {
   }
 
   if (error) {
+    console.log("dsfds", error)
     return (
       <div className={styles.error}>
         <h1>{error}</h1>
@@ -67,7 +70,7 @@ export const Content = () => {
   return (
     <div className={styles.characters}>
       <Filters firstPage={() => setPage(1)} />
-      <Characters data={data[page]} />
+      <Characters data={data[page]?.results} />
       {data[page]?.info?.pages && (
         <Pagination
           count={data[page].info?.pages}

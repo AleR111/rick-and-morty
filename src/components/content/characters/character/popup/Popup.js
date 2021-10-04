@@ -9,7 +9,7 @@ import {
 } from "@mui/material"
 import { useEffect } from "react"
 import { shallowEqual, useDispatch, useSelector } from "react-redux"
-import { getEpisodes } from "../../../../store/episodes/thunks"
+import { getEpisodes } from "../../../../../store/episodes/thunks"
 import styles from "../character.module.scss"
 const style = {
   position: "absolute",
