@@ -1,4 +1,9 @@
-import { LOADING_START, LOADING_SUCCESS, LOADING_ERROR } from "./types"
+import {
+  LOADING_START,
+  LOADING_SUCCESS,
+  LOADING_ERROR,
+  CLEAR_DATA,
+} from "./types"
 
 const initialState = {
   data: {},
@@ -28,6 +33,11 @@ export const charactersReducer = (state = initialState, action) => {
         ...state,
         isPending: false,
         error: action.payload,
+      }
+    case CLEAR_DATA:
+      return {
+        ...state,
+        data: {},
       }
     default:
       return state

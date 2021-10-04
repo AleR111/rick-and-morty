@@ -9,17 +9,14 @@ import {
   ButtonGroup,
 } from "@mui/material"
 import { useDispatch, useSelector } from "react-redux"
+import { clearData } from "../../../store/api"
 import { getCharacters } from "../../../store/api/thunks"
-import { clearFilter, setFilter } from "../../../store/filters"
+import { clearFilter, setFilterUrl, setFilter } from "../../../store/filters"
 import styles from "./filters.module.scss"
 
-export const Filters = ({
-  firstPage,
-  getCharactersWithFilters,
-  clearFilterUrl,
-}) => {
+export const Filters = ({ firstPage }) => {
   const dispatch = useDispatch()
-  const filters = useSelector((state) => state.filtersStore.filters)
+  const { filters } = useSelector((state) => state.filtersStore)
 
   const handleChange = (e) => {
     dispatch(setFilter(e.target.name, e.target.value))
@@ -32,15 +29,16 @@ export const Filters = ({
       filter += `${key}=${filters[key]}&`
     }
     if (!filter) return
+    dispatch(setFilterUrl(filter))
+    dispatch(clearData())
     firstPage()
-    getCharactersWithFilters(filter)
     dispatch(getCharacters(filter, 1))
   }
 
   const clear = () => {
     dispatch(clearFilter())
-    clearFilterUrl()
     dispatch(getCharacters(`page=${1}`, 1))
+    dispatch(clearData())
     firstPage()
   }
 

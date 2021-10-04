@@ -1,5 +1,5 @@
 import { LinearProgress, Button, Pagination } from "@mui/material"
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getCharacters } from "../../store/api/thunks"
 import { clearFilter } from "../../store/filters"
@@ -10,28 +10,22 @@ export const Characters = () => {
   const dispatch = useDispatch()
   const [page, setPage] = useState(1)
 
-  const [filter, setFilter] = useState("")
-
+  const { filtersUrl } = useSelector(
+    (state) => state.filtersStore,
+    (prev, next) => prev.filtersUrl === next.filtersUrl,
+  )
   const { data, isPending, error } = useSelector(
     (store) => store.charactersStore,
   )
 
-  const getPage = useCallback(
-    (page = 1) => {
-      console.log(filter)
-      if (filter) {
-        // if (filter !== "clear" && data[page]) return
-        dispatch(getCharacters(`${filter}page=${page}`, page))
-      } else {
-        // if (filter === "clear" && data[page]) return
-        dispatch(getCharacters(`page=${page}`, page))
-      }
-    },
-    [dispatch, filter],
-  )
-
-  const getCharactersWithFilters = (filter) => {
-    setFilter(filter)
+  const getPage = (page = 1) => {
+    if (filtersUrl) {
+      if (data[page]) return
+      dispatch(getCharacters(`${filtersUrl}page=${page}`, page))
+    } else {
+      if (data[page]) return
+      dispatch(getCharacters(`page=${page}`, page))
+    }
   }
 
   const newPage = (page) => {
@@ -46,8 +40,8 @@ export const Characters = () => {
   }
 
   useEffect(() => {
-    getPage()
-  }, [getPage])
+    dispatch(getCharacters(`page=${1}`, 1))
+  }, [dispatch])
 
   if (isPending) {
     return (
@@ -72,12 +66,7 @@ export const Characters = () => {
 
   return (
     <div className={styles.characters}>
-      <Filters
-        firstPage={() => setPage(1)}
-        getPage={getPage}
-        getCharactersWithFilters={getCharactersWithFilters}
-        clearFilterUrl={() => setFilter("clear")}
-      />
+      <Filters firstPage={() => setPage(1)} />
       <div className={styles.container}>
         {data[page]?.results?.map((el) => (
           <Character key={el.id} characterData={el} />

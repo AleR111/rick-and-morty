@@ -1,4 +1,4 @@
-import { SET_FILTER, CLEAR_FILTER } from "./types"
+import { SET_FILTER, CLEAR_FILTER, SET_FILTER_URL } from "./types"
 
 const initialState = {
   filters: {
@@ -8,6 +8,7 @@ const initialState = {
     type: "",
     gender: "",
   },
+  filtersUrl: "",
 }
 
 export const filtersReducer = (state = initialState, action) => {
@@ -31,6 +32,12 @@ export const filtersReducer = (state = initialState, action) => {
           type: "",
           gender: "",
         },
+        filtersUrl: "",
+      }
+    case SET_FILTER_URL:
+      return {
+        ...state,
+        filtersUrl: action.payload,
       }
     default:
       return state
