@@ -31,8 +31,8 @@ export const Filters = ({ firstPage }) => {
     if (!filter) return
     dispatch(setFilterUrl(filter))
     dispatch(clearData())
-    firstPage()
     dispatch(getCharacters(filter, 1))
+    firstPage()
   }
 
   const clear = () => {

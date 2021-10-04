@@ -5,9 +5,9 @@ import { Popup } from "./popup"
 
 export const Character = ({ characterData }) => {
   const [open, setOpen] = useState(false)
+
   const handleOpen = () => {
     setOpen(true)
-    console.log(1124324324)
   }
   const handleClose = () => setOpen(false)
 

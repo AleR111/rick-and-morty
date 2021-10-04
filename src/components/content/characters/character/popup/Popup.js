@@ -8,32 +8,26 @@ import {
   CircularProgress,
 } from "@mui/material"
 import { useEffect } from "react"
-import { shallowEqual, useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { getEpisodes } from "../../../../../store/episodes/thunks"
 import styles from "../character.module.scss"
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  boxShadow: 24,
-  outline: "unset",
-}
+import stylesPopup from "./popup.module.scss"
+
 export const Popup = ({ open, handleClose, characterData }) => {
   const dispatch = useDispatch()
+
   const { data, isPending, error } =
-    useSelector((store) => store.episodesStore, shallowEqual) || ""
+    useSelector(
+      (store) => store.episodesStore,
+      (prev, next) =>
+        prev.data[characterData.id] === next.data[characterData.id],
+    ) || ""
 
   const firstEpisode = data[characterData.id] || ""
-
+  console.log(111111111111111)
   useEffect(() => {
     if (firstEpisode) return
-    dispatch(
-      getEpisodes(
-        characterData.episode[characterData.episode.length - 1],
-        characterData.id,
-      ),
-    )
+    dispatch(getEpisodes(characterData.episode[[0]], characterData.id))
   }, [dispatch, characterData.episode, characterData.id, firstEpisode])
 
   const loading = () => {
@@ -52,7 +46,7 @@ export const Popup = ({ open, handleClose, characterData }) => {
             src={characterData.image}
             alt={characterData.name}
           />
-          <CardContent className={styles.propsBox}>
+          <CardContent className={stylesPopup.propsBox}>
             <div className={styles.propPop}>
               <h2 className={styles.name}>{characterData.name}</h2>
               <p>
@@ -98,7 +92,7 @@ export const Popup = ({ open, handleClose, characterData }) => {
       }}
     >
       <Fade in={open}>
-        <Box sx={style}>{loading()}</Box>
+        <Box className={stylesPopup.box}>{loading()}</Box>
       </Fade>
     </Modal>
   )
