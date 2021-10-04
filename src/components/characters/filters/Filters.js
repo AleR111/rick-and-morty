@@ -9,8 +9,8 @@ import {
   ButtonGroup,
 } from "@mui/material"
 import { useDispatch, useSelector } from "react-redux"
-import { clearData } from "../../../store/api"
-import { getCharacters } from "../../../store/api/thunks"
+import { clearData } from "../../../store/characters"
+import { getCharacters } from "../../../store/characters/thunks"
 import { clearFilter, setFilterUrl, setFilter } from "../../../store/filters"
 import styles from "./filters.module.scss"
 
@@ -37,8 +37,8 @@ export const Filters = ({ firstPage }) => {
 
   const clear = () => {
     dispatch(clearFilter())
-    dispatch(getCharacters(`page=${1}`, 1))
     dispatch(clearData())
+    dispatch(getCharacters(`page=${1}`, 1))
     firstPage()
   }
 

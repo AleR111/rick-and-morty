@@ -1,7 +1,7 @@
 import { LinearProgress, Button, Pagination } from "@mui/material"
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getCharacters } from "../../store/api/thunks"
+import { getCharacters } from "../../store/characters/thunks"
 import { clearFilter } from "../../store/filters"
 import { Character, Filters } from "./"
 import styles from "./characters.module.scss"
