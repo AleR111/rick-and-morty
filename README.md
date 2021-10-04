@@ -1,3 +1,10 @@
+# The Rick and Morty Characters APP
+
+## Overview
+
+This APP use API [https://rickandmortyapi.com](https://rickandmortyapi.com)   
+You can see the APP following the website [http://aler111-site.space](http://aler111-site.space)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
